@@ -1,217 +1,150 @@
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-
-scroll-behavior:smooth;
-
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-
-background:#070707;
-color:white;
-font-family:"Cormorant Garamond",serif;
-overflow-x:hidden;
-
+body {
+  background: #070707;
+  color: white;
+  font-family: "Cormorant Garamond", serif;
+  overflow-x: hidden;
+  cursor: none;
 }
 
-.background{
-
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-
-background:
-
-radial-gradient(circle at top,#171717,#070707);
-
-z-index:-2;
-
+/* ================= BACKGROUND ================= */
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle at top, #171717, #070707);
+  z-index: -2;
+  animation: breathe 10s ease-in-out infinite;
 }
 
-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:30px 8%;
-
-position:fixed;
-
-width:100%;
-
-backdrop-filter:blur(10px);
-
-background:rgba(0,0,0,.15);
-
-z-index:100;
-
+@keyframes breathe {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.15) blur(2px); }
+  100% { filter: brightness(1); }
 }
 
-.logo{
-
-font-family:"Cinzel",serif;
-
-font-size:34px;
-
-letter-spacing:6px;
-
+/* ================= HEADER ================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 8%;
+  position: fixed;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.15);
+  z-index: 100;
 }
 
-nav{
-
-display:flex;
-
-gap:40px;
-
+.logo {
+  font-family: "Cinzel", serif;
+  font-size: 34px;
+  letter-spacing: 6px;
 }
 
-nav a{
-
-color:white;
-
-text-decoration:none;
-
-transition:.3s;
-
+nav {
+  display: flex;
+  gap: 40px;
 }
 
-nav a:hover{
-
-color:#d7c5ff;
-
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: .3s;
 }
 
-.hero{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-padding:20px;
-
+nav a:hover {
+  color: #d7c5ff;
 }
 
-.hero h1{
-
-font-family:"Cinzel";
-
-font-size:90px;
-
-letter-spacing:8px;
-
+/* ================= HERO ================= */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
 }
 
-.hero h2{
-
-font-size:34px;
-
-font-weight:300;
-
-margin-top:10px;
-
+.hero h1 {
+  font-family: "Cinzel";
+  font-size: 90px;
+  letter-spacing: 8px;
 }
 
-.hero p{
-
-margin-top:20px;
-
-font-size:24px;
-
-opacity:.8;
-
+.hero h2 {
+  font-size: 34px;
+  font-weight: 300;
+  margin-top: 10px;
 }
 
-button{
-
-margin-top:40px;
-
-padding:15px 45px;
-
-border:none;
-
-cursor:pointer;
-
-background:white;
-
-transition:.3s;
-
-font-size:18px;
-
+.hero p {
+  margin-top: 20px;
+  font-size: 24px;
+  opacity: .8;
 }
 
-button:hover{
-
-transform:translateY(-5px);
-
-background:#d7c5ff;
-
+/* ================= BUTTON ================= */
+button {
+  margin-top: 40px;
+  padding: 15px 45px;
+  border: none;
+  cursor: pointer;
+  background: white;
+  transition: .3s;
+  font-size: 18px;
 }
 
-.gallery{
-
-padding:120px 8%;
-
+button:hover {
+  transform: translateY(-5px);
+  background: #d7c5ff;
 }
 
-.gallery h2{
-
-font-family:"Cinzel";
-
-font-size:42px;
-
-margin-bottom:50px;
-
-text-align:center;
-
+/* ================= GALLERY ================= */
+.gallery {
+  padding: 120px 8%;
 }
 
-.grid{
-
-columns:4 250px;
-
-column-gap:20px;
-
+.gallery h2 {
+  font-family: "Cinzel";
+  font-size: 42px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
-.card{
-
-background:#1d1d1d;
-
-height:300px;
-
-margin-bottom:20px;
-
-border-radius:20px;
-
-transition:.4s;
-
-break-inside:avoid;
-
+.grid {
+  columns: 4 250px;
+  column-gap: 20px;
 }
 
-.card:hover{ .card {
+.card {
+  background: #1d1d1d;
+  height: 300px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  transition: .4s;
+  break-inside: avoid;
   position: relative;
   overflow: hidden;
 }
 
+.card:hover {
+  transform: scale(1.03) translateY(-5px);
+}
+
+/* glow */
 .card::before {
   content: "";
   position: absolute;
@@ -225,111 +158,40 @@ break-inside:avoid;
   opacity: 1;
 }
 
-.card:hover {
-  transform: scale(1.03) translateY(-5px);
+/* ================= ABOUT ================= */
+.about {
+  padding: 150px 15%;
+  text-align: center;
 }
 
-
+.about h2 {
+  font-family: "Cinzel";
+  font-size: 42px;
+  margin-bottom: 25px;
 }
 
-.tall{
-
-height:500px;
-
+.about p {
+  font-size: 24px;
+  line-height: 1.8;
+  opacity: .85;
 }
 
-.wide{
-
-height:400px;
-
+/* ================= FOOTER ================= */
+footer {
+  padding: 60px;
+  text-align: center;
+  opacity: .5;
 }
 
-.about{
-
-padding:150px 15%;
-
-text-align:center;
-
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px) {
+  .hero h1 { font-size: 55px; }
+  .hero h2 { font-size: 25px; }
+  .hero p { font-size: 18px; }
+  nav { display: none; }
 }
 
-.about h2{
-
-font-family:"Cinzel";
-
-font-size:42px;
-
-margin-bottom:25px;
-
-}
-
-.about p{
-
-font-size:24px;
-
-line-height:1.8;
-
-opacity:.85;
-
-}
-
-footer{
-
-padding:60px;
-
-text-align:center;
-
-opacity:.5;
-
-}
-
-@media(max-width:900px){
-
-.hero h1{
-
-font-size:55px;
-
-}
-
-.hero h2{
-
-font-size:25px;
-
-}
-
-.hero p{
-
-font-size:18px;
-
-}
-
-nav{
-
-display:none;
-
-}
-
-}.background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: radial-gradient(circle at top, #171717, #070707);
-  z-index: -2;
-  animation: breathe 10s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0% {
-    filter: brightness(1) blur(0px);
-  }
-  50% {
-    filter: brightness(1.15) blur(2px);
-  }
-  100% {
-    filter: brightness(1) blur(0px);
-  }
-}
+/* ================= BUTTERFLY ================= */
 body::after {
   content: "🦋";
   position: fixed;
@@ -342,40 +204,12 @@ body::after {
 }
 
 @keyframes floatButterfly {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(60vw) translateY(-40px);
-  }
-  100% {
-    transform: translateX(120vw) translateY(0);
-  }
-}
-.hero, .gallery, .about {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: reveal 1s ease forwards;
+  0% { transform: translateX(0); }
+  50% { transform: translateX(60vw) translateY(-40px); }
+  100% { transform: translateX(120vw); }
 }
 
-.gallery {
-  animation-delay: 0.2s;
-}
-
-.about {
-  animation-delay: 0.4s;
-}
-
-@keyframes reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}body {
-  cursor: none;
-}
-
-/* CURSOR ESTRELLA */
+/* ================= CURSOR ================= */
 .cursor-star {
   position: fixed;
   width: 18px;
@@ -395,7 +229,10 @@ body::after {
   transform: translate(-50%, -50%);
   z-index: 99999;
   filter: drop-shadow(0 0 6px rgba(184,141,255,0.6));
-}.butterfly {
+}
+
+/* ================= FLOATING BUTTERFLIES ================= */
+.butterfly {
   position: fixed;
   font-size: 16px;
   color: #b88dff;
@@ -410,9 +247,7 @@ body::after {
     transform: translateY(0) translateX(0) rotate(0deg);
     opacity: 0;
   }
-  10% {
-    opacity: 0.2;
-  }
+  10% { opacity: 0.2; }
   100% {
     transform: translateY(-120vh) translateX(40px) rotate(20deg);
     opacity: 0;
