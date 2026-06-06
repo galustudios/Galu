@@ -1,292 +1,146 @@
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-
-scroll-behavior:smooth;
-
+body {
+  background: #070707;
+  color: #B88DFF;
+  font-family: "Cormorant Garamond", serif;
+  overflow-x: hidden;
 }
 
-body{
-
-background:#070707;
-color:white;
-font-family:"Cormorant Garamond",serif;
-overflow-x:hidden;
-
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 50px;
+  font-family: "Cinzel", serif;
+  letter-spacing: 2px;
 }
 
-.background{
-
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-
-background:
-
-radial-gradient(circle at top,#171717,#070707);
-
-z-index:-2;
-
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #B88DFF;
+  transition: 0.3s;
 }
 
-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:30px 8%;
-
-position:fixed;
-
-width:100%;
-
-backdrop-filter:blur(10px);
-
-background:rgba(0,0,0,.15);
-
-z-index:100;
-
+.navbar a:hover {
+  color: #D8C2FF;
 }
 
-.logo{
-
-font-family:"Cinzel",serif;
-
-font-size:34px;
-
-letter-spacing:6px;
-
+/* HERO */
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-nav{
-
-display:flex;
-
-gap:40px;
-
+.title {
+  font-size: 80px;
+  font-family: "Cinzel", serif;
 }
 
-nav a{
-
-color:white;
-
-text-decoration:none;
-
-transition:.3s;
-
+.subtitle {
+  font-size: 24px;
 }
 
-nav a:hover{
-
-color:#d7c5ff;
-
+.subtext {
+  opacity: 0.7;
+  margin-bottom: 40px;
 }
 
-.hero{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-padding:20px;
-
+/* BUTTON */
+.explore-btn {
+  padding: 15px 60px;
+  border: 1px solid #B88DFF;
+  background: transparent;
+  color: #B88DFF;
+  cursor: pointer;
+  letter-spacing: 3px;
+  transition: 0.3s;
 }
 
-.hero h1{
-
-font-family:"Cinzel";
-
-font-size:90px;
-
-letter-spacing:8px;
-
+.explore-btn:hover {
+  background: linear-gradient(90deg, transparent, #B88DFF, transparent);
+  color: #070707;
 }
 
-.hero h2{
-
-font-size:34px;
-
-font-weight:300;
-
-margin-top:10px;
-
+/* DISCOVER */
+.discover {
+  padding: 100px 50px;
 }
 
-.hero p{
-
-margin-top:20px;
-
-font-size:24px;
-
-opacity:.8;
-
+.discover h2 {
+  margin-bottom: 40px;
 }
 
-button{
-
-margin-top:40px;
-
-padding:15px 45px;
-
-border:none;
-
-cursor:pointer;
-
-background:white;
-
-transition:.3s;
-
-font-size:18px;
-
+/* MASONRY */
+.masonry {
+  column-count: 3;
+  column-gap: 20px;
 }
 
-button:hover{
-
-transform:translateY(-5px);
-
-background:#d7c5ff;
-
+.card {
+  height: 200px;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #000, #2a0f3d);
+  border-radius: 12px;
+  transition: 0.3s;
 }
 
-.gallery{
-
-padding:120px 8%;
-
+.card:hover {
+  background: linear-gradient(180deg, #2a0f3d, #B88DFF);
+  transform: scale(1.02);
 }
 
-.gallery h2{
-
-font-family:"Cinzel";
-
-font-size:42px;
-
-margin-bottom:50px;
-
-text-align:center;
-
+/* ABOUT */
+.about {
+  padding: 120px 50px;
+  max-width: 600px;
 }
 
-.grid{
-
-columns:4 250px;
-
-column-gap:20px;
-
+.about p {
+  opacity: 0.8;
+  line-height: 1.6;
 }
 
-.card{
-
-background:#1d1d1d;
-
-height:300px;
-
-margin-bottom:20px;
-
-border-radius:20px;
-
-transition:.4s;
-
-break-inside:avoid;
-
+/* FOOTER */
+footer {
+  padding: 60px 50px;
+  text-align: center;
 }
 
-.card:hover{
-
-transform:scale(1.03);
-
+.footer-logo {
+  font-family: "Cinzel", serif;
+  margin-bottom: 20px;
 }
 
-.tall{
-
-height:500px;
-
+.links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #B88DFF;
 }
 
-.wide{
-
-height:400px;
-
+/* ANIMATION BASE (V1.2 PREP) */
+.hero, .discover, .about {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s forwards;
 }
 
-.about{
+.discover { animation-delay: 0.2s; }
+.about { animation-delay: 0.4s; }
 
-padding:150px 15%;
-
-text-align:center;
-
-}
-
-.about h2{
-
-font-family:"Cinzel";
-
-font-size:42px;
-
-margin-bottom:25px;
-
-}
-
-.about p{
-
-font-size:24px;
-
-line-height:1.8;
-
-opacity:.85;
-
-}
-
-footer{
-
-padding:60px;
-
-text-align:center;
-
-opacity:.5;
-
-}
-
-@media(max-width:900px){
-
-.hero h1{
-
-font-size:55px;
-
-}
-
-.hero h2{
-
-font-size:25px;
-
-}
-
-.hero p{
-
-font-size:18px;
-
-}
-
-nav{
-
-display:none;
-
-}
-
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
