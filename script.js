@@ -5,24 +5,19 @@ document.querySelector(".explore-btn").addEventListener("click", () => {
   });
 });
 
-// ================= GLOW MOUSE EFFECT =================
-const cards = document.querySelectorAll(".card");
-
-cards.forEach(card => {
+// ================= GLOW FOLLOW MOUSE =================
+document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("mousemove", (e) => {
     const rect = card.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    card.style.setProperty("--x", `${x}px`);
-    card.style.setProperty("--y", `${y}px`);
+    card.style.setProperty("--x", (e.clientX - rect.left) + "px");
+    card.style.setProperty("--y", (e.clientY - rect.top) + "px");
   });
 });
 
-// loader cleanup safety
+// ================= LOADER SAFE CLEAN =================
 window.addEventListener("load", () => {
   setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
+    const loader = document.getElementById("loader");
+    if (loader) loader.style.display = "none";
   }, 2500);
 });
