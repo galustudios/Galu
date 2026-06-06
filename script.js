@@ -1,23 +1,14 @@
-// EXPLORE SCROLL
-document.querySelector(".explore-btn").addEventListener("click", () => {
-  document.querySelector(".discover").scrollIntoView({
-    behavior: "smooth"
-  });
-});
+const cards = document.querySelectorAll(".card");
 
-// ================= GLOW FOLLOW MOUSE =================
-document.querySelectorAll(".card").forEach(card => {
-  card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty("--x", (e.clientX - rect.left) + "px");
-    card.style.setProperty("--y", (e.clientY - rect.top) + "px");
-  });
-});
+// hover motion más suave (editorial feel)
+cards.forEach(card => {
 
-// ================= LOADER SAFE CLEAN =================
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    const loader = document.getElementById("loader");
-    if (loader) loader.style.display = "none";
-  }, 2500);
+  card.addEventListener("mousemove", () => {
+    card.style.transform = "translateY(-8px) scale(1.03)";
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translateY(0) scale(1)";
+  });
+
 });
