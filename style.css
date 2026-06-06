@@ -16,7 +16,7 @@ body {
   cursor: none;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 .background {
   position: fixed;
   width: 100%;
@@ -25,16 +25,9 @@ body {
   left: 0;
   background: radial-gradient(circle at top, #171717, #070707);
   z-index: -2;
-  animation: breathe 10s ease-in-out infinite;
 }
 
-@keyframes breathe {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(1.15) blur(2px); }
-  100% { filter: brightness(1); }
-}
-
-/* ================= HEADER ================= */
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
@@ -43,7 +36,7 @@ header {
   position: fixed;
   width: 100%;
   backdrop-filter: blur(10px);
-  background: rgba(0,0,0,.15);
+  background: rgba(0,0,0,0.15);
   z-index: 100;
 }
 
@@ -61,14 +54,14 @@ nav {
 nav a {
   color: white;
   text-decoration: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 nav a:hover {
   color: #d7c5ff;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
@@ -93,17 +86,17 @@ nav a:hover {
 .hero p {
   margin-top: 20px;
   font-size: 24px;
-  opacity: .8;
+  opacity: 0.8;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 button {
   margin-top: 40px;
   padding: 15px 45px;
   border: none;
   cursor: pointer;
   background: white;
-  transition: .3s;
+  transition: 0.3s;
   font-size: 18px;
 }
 
@@ -112,7 +105,7 @@ button:hover {
   background: #d7c5ff;
 }
 
-/* ================= GALLERY ================= */
+/* GALLERY */
 .gallery {
   padding: 120px 8%;
 }
@@ -134,7 +127,7 @@ button:hover {
   height: 300px;
   margin-bottom: 20px;
   border-radius: 20px;
-  transition: .4s;
+  transition: 0.4s;
   break-inside: avoid;
   position: relative;
   overflow: hidden;
@@ -144,7 +137,6 @@ button:hover {
   transform: scale(1.03) translateY(-5px);
 }
 
-/* glow */
 .card::before {
   content: "";
   position: absolute;
@@ -158,7 +150,15 @@ button:hover {
   opacity: 1;
 }
 
-/* ================= ABOUT ================= */
+.tall {
+  height: 500px;
+}
+
+.wide {
+  height: 400px;
+}
+
+/* ABOUT */
 .about {
   padding: 150px 15%;
   text-align: center;
@@ -173,83 +173,20 @@ button:hover {
 .about p {
   font-size: 24px;
   line-height: 1.8;
-  opacity: .85;
+  opacity: 0.85;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer {
   padding: 60px;
   text-align: center;
-  opacity: .5;
+  opacity: 0.6;
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px) {
+/* RESPONSIVE */
+@media(max-width: 900px) {
   .hero h1 { font-size: 55px; }
   .hero h2 { font-size: 25px; }
   .hero p { font-size: 18px; }
   nav { display: none; }
-}
-
-/* ================= BUTTERFLY ================= */
-body::after {
-  content: "🦋";
-  position: fixed;
-  top: 60%;
-  left: -50px;
-  font-size: 18px;
-  opacity: 0.08;
-  animation: floatButterfly 18s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes floatButterfly {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(60vw) translateY(-40px); }
-  100% { transform: translateX(120vw); }
-}
-
-/* ================= CURSOR ================= */
-.cursor-star {
-  position: fixed;
-  width: 18px;
-  height: 18px;
-  background: #d7c5ff;
-  clip-path: polygon(
-    50% 0%,
-    60% 40%,
-    100% 50%,
-    60% 60%,
-    50% 100%,
-    40% 60%,
-    0% 50%,
-    40% 40%
-  );
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 99999;
-  filter: drop-shadow(0 0 6px rgba(184,141,255,0.6));
-}
-
-/* ================= FLOATING BUTTERFLIES ================= */
-.butterfly {
-  position: fixed;
-  font-size: 16px;
-  color: #b88dff;
-  opacity: 0.18;
-  pointer-events: none;
-  animation: floatButterfly linear infinite;
-  filter: blur(0.3px);
-}
-
-@keyframes floatButterfly {
-  0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% { opacity: 0.2; }
-  100% {
-    transform: translateY(-120vh) translateX(40px) rotate(20deg);
-    opacity: 0;
-  }
 }
