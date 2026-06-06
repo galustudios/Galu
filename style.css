@@ -27,6 +27,33 @@ body {
   z-index: -2;
 }
 
+/* ── FIX: CURSOR STAR — antes estos estilos no existían ── */
+/* Sin ellos el cursor era invisible y el nativo desaparecía */
+.cursor-star {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease;
+}
+
+.cursor-star::before {
+  content: "✦";
+  font-size: 18px;
+  color: #d7c5ff;
+  display: block;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px #d7c5ff);
+}
+
+.cursor-star.hover {
+  transform: translate(-50%, -50%) scale(1.8);
+}
+
 /* HEADER */
 header {
   display: flex;
@@ -36,7 +63,7 @@ header {
   position: fixed;
   width: 100%;
   backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   z-index: 100;
 }
 
@@ -71,8 +98,14 @@ nav a:hover {
   padding: 20px;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .hero h1 {
-  font-family: "Cinzel";
+  font-family: "Cinzel", serif;
   font-size: 90px;
   letter-spacing: 8px;
 }
@@ -90,17 +123,19 @@ nav a:hover {
 }
 
 /* BUTTON */
-button {
+.explore-btn {
   margin-top: 40px;
   padding: 15px 45px;
   border: none;
-  cursor: pointer;
+  cursor: none;
   background: white;
   transition: 0.3s;
   font-size: 18px;
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 2px;
 }
 
-button:hover {
+.explore-btn:hover {
   transform: translateY(-5px);
   background: #d7c5ff;
 }
@@ -111,7 +146,7 @@ button:hover {
 }
 
 .gallery h2 {
-  font-family: "Cinzel";
+  font-family: "Cinzel", serif;
   font-size: 42px;
   margin-bottom: 50px;
   text-align: center;
@@ -123,7 +158,6 @@ button:hover {
 }
 
 .card {
-  background: #1d1d1d;
   height: 300px;
   margin-bottom: 20px;
   border-radius: 20px;
@@ -131,7 +165,20 @@ button:hover {
   break-inside: avoid;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
 }
+
+/* FIX: gradientes únicos por card para que no estén vacías y negras */
+.card:nth-child(1) { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.card:nth-child(2) { background: linear-gradient(135deg, #1d1d1d, #2a1f3d); }
+.card:nth-child(3) { background: linear-gradient(135deg, #0f2027, #203a43); }
+.card:nth-child(4) { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
+.card:nth-child(5) { background: linear-gradient(135deg, #2c1654, #1a0a2e); }
+.card:nth-child(6) { background: linear-gradient(135deg, #0d0d0d, #1a1a2e); }
+.card:nth-child(7) { background: linear-gradient(135deg, #1b2838, #0f1923); }
+.card:nth-child(8) { background: linear-gradient(135deg, #1d1d2e, #2a2a3e); }
 
 .card:hover {
   transform: scale(1.03) translateY(-5px);
@@ -141,7 +188,7 @@ button:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(215,197,255,0.08), transparent 60%);
+  background: radial-gradient(circle at center, rgba(215, 197, 255, 0.08), transparent 60%);
   opacity: 0;
   transition: 0.4s;
 }
@@ -150,13 +197,23 @@ button:hover {
   opacity: 1;
 }
 
-.tall {
-  height: 500px;
+.card-label {
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #d7c5ff;
+  opacity: 0;
+  transition: 0.4s;
+  position: relative;
+  z-index: 1;
 }
 
-.wide {
-  height: 400px;
+.card:hover .card-label {
+  opacity: 1;
 }
+
+.tall { height: 500px; }
+.wide { height: 400px; }
 
 /* ABOUT */
 .about {
@@ -165,7 +222,7 @@ button:hover {
 }
 
 .about h2 {
-  font-family: "Cinzel";
+  font-family: "Cinzel", serif;
   font-size: 42px;
   margin-bottom: 25px;
 }
@@ -184,9 +241,9 @@ footer {
 }
 
 /* RESPONSIVE */
-@media(max-width: 900px) {
+@media (max-width: 900px) {
   .hero h1 { font-size: 55px; }
   .hero h2 { font-size: 25px; }
-  .hero p { font-size: 18px; }
-  nav { display: none; }
+  .hero p  { font-size: 18px; }
+  nav      { display: none; }
 }
