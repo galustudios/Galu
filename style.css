@@ -1,4 +1,3 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,19 +5,84 @@
 }
 
 body {
-  background: #070707;
+  background: radial-gradient(circle at top, #120012, #070707);
   color: #B88DFF;
   font-family: "Cormorant Garamond", serif;
   overflow-x: hidden;
 }
 
-/* NAVBAR */
+/* ================= LOADER ================= */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #070707;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOut 1.5s ease forwards;
+  animation-delay: 2s;
+}
+
+.loader h1 {
+  font-family: "Cinzel", serif;
+  font-size: 60px;
+  letter-spacing: 8px;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ================= INTRO BUTTERFLY ================= */
+.intro-butterfly {
+  position: fixed;
+  top: 50%;
+  left: -50px;
+  font-size: 24px;
+  opacity: 0;
+  animation: fly 2.2s ease forwards;
+  animation-delay: 2s;
+  z-index: 9998;
+  filter: blur(0.5px);
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) translateY(-40px);
+    opacity: 0;
+  }
+}
+
+/* ================= CONTENT ================= */
+.content {
+  opacity: 0;
+  animation: show 1s ease forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ================= NAV ================= */
 .navbar {
   display: flex;
   justify-content: space-between;
   padding: 25px 50px;
   font-family: "Cinzel", serif;
-  letter-spacing: 2px;
 }
 
 .navbar a {
@@ -32,7 +96,7 @@ body {
   color: #D8C2FF;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero {
   height: 90vh;
   display: flex;
@@ -47,23 +111,14 @@ body {
   font-family: "Cinzel", serif;
 }
 
-.subtitle {
-  font-size: 24px;
-}
-
-.subtext {
-  opacity: 0.7;
-  margin-bottom: 40px;
-}
-
-/* BUTTON */
 .explore-btn {
+  margin-top: 40px;
   padding: 15px 60px;
   border: 1px solid #B88DFF;
   background: transparent;
   color: #B88DFF;
-  cursor: pointer;
   letter-spacing: 3px;
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -72,75 +127,59 @@ body {
   color: #070707;
 }
 
-/* DISCOVER */
+/* ================= DISCOVER ================= */
 .discover {
-  padding: 100px 50px;
+  padding: 120px 50px;
 }
 
-.discover h2 {
-  margin-bottom: 40px;
-}
-
-/* MASONRY */
 .masonry {
   column-count: 3;
   column-gap: 20px;
 }
 
 .card {
-  height: 200px;
+  height: 220px;
   margin-bottom: 20px;
+  border-radius: 14px;
   background: linear-gradient(180deg, #000, #2a0f3d);
-  border-radius: 12px;
   transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
-.card:hover {
-  background: linear-gradient(180deg, #2a0f3d, #B88DFF);
-  transform: scale(1.02);
+/* ================= GLOW EFFECT ================= */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(184,141,255,0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-/* ABOUT */
+.card:hover::after {
+  opacity: 1;
+}
+
+/* ================= ABOUT ================= */
 .about {
   padding: 120px 50px;
   max-width: 600px;
 }
 
-.about p {
-  opacity: 0.8;
-  line-height: 1.6;
-}
-
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer {
   padding: 60px 50px;
   text-align: center;
 }
 
-.footer-logo {
-  font-family: "Cinzel", serif;
-  margin-bottom: 20px;
-}
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .masonry {
+    column-count: 1;
+  }
 
-.links a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #B88DFF;
-}
-
-/* ANIMATION BASE (V1.2 PREP) */
-.hero, .discover, .about {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeUp 1s forwards;
-}
-
-.discover { animation-delay: 0.2s; }
-.about { animation-delay: 0.4s; }
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .title {
+    font-size: 50px;
   }
 }
