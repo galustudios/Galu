@@ -371,4 +371,50 @@ body::after {
     opacity: 1;
     transform: translateY(0);
   }
+}body {
+  cursor: none;
+}
+
+/* CURSOR ESTRELLA */
+.cursor-star {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  background: #d7c5ff;
+  clip-path: polygon(
+    50% 0%,
+    60% 40%,
+    100% 50%,
+    60% 60%,
+    50% 100%,
+    40% 60%,
+    0% 50%,
+    40% 40%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  filter: drop-shadow(0 0 6px rgba(184,141,255,0.6));
+}.butterfly {
+  position: fixed;
+  font-size: 16px;
+  color: #b88dff;
+  opacity: 0.18;
+  pointer-events: none;
+  animation: floatButterfly linear infinite;
+  filter: blur(0.3px);
+}
+
+@keyframes floatButterfly {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(40px) rotate(20deg);
+    opacity: 0;
+  }
 }
