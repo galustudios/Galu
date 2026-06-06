@@ -23,8 +23,46 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  background: radial-gradient(circle at top, #171717, #070707);
+  background: radial-gradient(circle at top, #2a1a4e, #070707);
   z-index: -2;
+}
+
+/* MARIPOSAS */
+.butterfly {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: flotar linear infinite;
+}
+
+.butterfly svg {
+  animation: aletear ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(215, 197, 255, 0.6));
+}
+
+/* Flotar: sube de abajo hacia arriba con ligero vaivén */
+@keyframes flotar {
+  0% {
+    transform: translateY(110vh) translateX(0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(var(--drift));
+    opacity: 0;
+  }
+}
+
+/* Aletear: las alas se abren y cierran */
+@keyframes aletear {
+  0%, 100% { transform: scaleX(1); }
+  50%       { transform: scaleX(0.3); }
 }
 
 /* ── FIX: CURSOR STAR — antes estos estilos no existían ── */
