@@ -17,16 +17,16 @@
 
   <div class="background"></div>
 
-  <!-- FIX: cursor definido en HTML con id para que el JS lo encuentre -->
   <div class="cursor-star" id="cursor"></div>
 
   <header>
     <div class="logo">GALU</div>
     <nav>
       <a href="#">Home</a>
+      <a href="#designs">Designs</a>
       <a href="#gallery">Gallery</a>
+      <a href="#shop">Shop</a>
       <a href="#about">About</a>
-      <a href="#">Contact</a>
     </nav>
   </header>
 
@@ -39,35 +39,25 @@
     </div>
   </section>
 
-  <!-- FIX: id="gallery" para que el botón Explore y el nav funcionen -->
-  <section class="gallery" id="gallery">
-    <h2>Gallery</h2>
-    <div class="grid">
-      <!-- FIX: cards con label para no estar vacías -->
-      <div class="card"><span class="card-label">No. 01</span></div>
-      <div class="card tall"><span class="card-label">No. 02</span></div>
-      <div class="card"><span class="card-label">No. 03</span></div>
-      <div class="card wide"><span class="card-label">No. 04</span></div>
-      <div class="card"><span class="card-label">No. 05</span></div>
-      <div class="card tall"><span class="card-label">No. 06</span></div>
-      <div class="card"><span class="card-label">No. 07</span></div>
-      <div class="card"><span class="card-label">No. 08</span></div>
-    </div>
-  </section>
+  <!-- DESIGNS: catálogo con selectores de color y talla -->
+  <section class="designs" id="designs">
+    <h2>Designs</h2>
+    <div class="designs-grid">
 
-  <!-- FIX: id="about" para navegación -->
-  <section class="about" id="about">
-    <h2>About</h2>
-    <p>
-      GALU is a wearable art project where illustrations become objects that people can carry with them every day.
-    </p>
-  </section>
-
-  <footer>
-    © 2026 GALU
-  </footer>
-
-  <script src="script.js"></script>
-
-</body>
-</html>
+      <div class="design-card">
+        <div class="design-preview" data-color="#2c1654">
+          <span class="design-name">Eclipse Tee</span>
+        </div>
+        <div class="design-options">
+          <div class="option-group">
+            <span class="option-label">Color</span>
+            <div class="color-options">
+              <button class="color-dot" style="--c:#2c1654" data-color="#2c1654" aria-label="Morado"></button>
+              <button class="color-dot" style="--c:#1a1a1a" data-color="#1a1a1a" aria-label="Negro"></button>
+              <button class="color-dot" style="--c:#d7c5ff" data-color="#d7c5ff" aria-label="Lavanda"></button>
+            </div>
+          </div>
+          <div class="option-group">
+            <span class="option-label">Talla</span>
+            <div class="size-options">
+              <button
