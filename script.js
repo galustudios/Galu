@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(crearMariposa, i * 600);
   }
 
-  // Seguir creando de forma continua
+  // Seguir creando de forma 
   setInterval(crearMariposa, 1800);
 
 });
