@@ -23,12 +23,11 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  background: radial-gradient(circle at top, #171717, #070707);
+  background: radial-gradient(circle at top, #2a1454, #070707);
   z-index: -2;
 }
 
-/* ── FIX: CURSOR STAR — antes estos estilos no existían ── */
-/* Sin ellos el cursor era invisible y el nativo desaparecía */
+/* CURSOR STAR */
 .cursor-star {
   position: fixed;
   top: 0;
@@ -52,6 +51,42 @@ body {
 
 .cursor-star.hover {
   transform: translate(-50%, -50%) scale(1.8);
+}
+
+/* MARIPOSAS */
+.butterfly {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  animation: flotar linear infinite;
+}
+
+.butterfly svg {
+  animation: aletear ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(215, 197, 255, 0.6));
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateX(-5vw) translateY(0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(calc(var(--drift))) translateY(-30vh);
+    opacity: 0;
+  }
+}
+
+@keyframes aletear {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(0.9); }
 }
 
 /* HEADER */
@@ -170,7 +205,6 @@ nav a:hover {
   padding: 20px;
 }
 
-/* FIX: gradientes únicos por card para que no estén vacías y negras */
 .card:nth-child(1) { background: linear-gradient(135deg, #1a1a2e, #16213e); }
 .card:nth-child(2) { background: linear-gradient(135deg, #1d1d1d, #2a1f3d); }
 .card:nth-child(3) { background: linear-gradient(135deg, #0f2027, #203a43); }
@@ -247,4 +281,3 @@ footer {
   .hero p  { font-size: 18px; }
   nav      { display: none; }
 }
-
