@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GALU | Wearable Art</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
   <div class="background"></div>
-
-  <!-- FIX: cursor definido en HTML con id para que el JS lo encuentre -->
   <div class="cursor-star" id="cursor"></div>
 
   <header>
@@ -39,23 +32,48 @@
     </div>
   </section>
 
-  <!-- FIX: id="gallery" para que el botón Explore y el nav funcionen -->
   <section class="gallery" id="gallery">
     <h2>Gallery</h2>
     <div class="grid">
-      <!-- FIX: cards con label para no estar vacías -->
-      <div class="card"><span class="card-label">No. 01</span></div>
-      <div class="card tall"><span class="card-label">No. 02</span></div>
-      <div class="card"><span class="card-label">No. 03</span></div>
-      <div class="card wide"><span class="card-label">No. 04</span></div>
-      <div class="card"><span class="card-label">No. 05</span></div>
-      <div class="card tall"><span class="card-label">No. 06</span></div>
-      <div class="card"><span class="card-label">No. 07</span></div>
-      <div class="card"><span class="card-label">No. 08</span></div>
+
+      <div class="card" data-product="https://galu-shop.fourthwall.com/products/astronaut-cat-space-hoodie" data-name="Astronaut Cat Space Hoodie">
+        <span class="card-label">No. 01</span>
+        <button class="card-buy-btn">Ver diseño</button>
+      </div>
+
+      <div class="card tall" data-product="https://galu-shop.fourthwall.com/products/mechanical-butterfly-zip-hoodie" data-name="Mechanical Butterfly Zip Hoodie">
+        <span class="card-label">No. 02</span>
+        <button class="card-buy-btn">Ver diseño</button>
+      </div>
+
+      <div class="card" data-product="https://galu-shop.fourthwall.com/products/galu-hoodie" data-name="Galu Hoodie">
+        <span class="card-label">No. 03</span>
+        <button class="card-buy-btn">Ver diseño</button>
+      </div>
+
+      <div class="card wide">
+        <span class="card-label">No. 04</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">No. 05</span>
+      </div>
+
+      <div class="card tall">
+        <span class="card-label">No. 06</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">No. 07</span>
+      </div>
+
+      <div class="card">
+        <span class="card-label">No. 08</span>
+      </div>
+
     </div>
   </section>
 
-  <!-- FIX: id="about" para navegación -->
   <section class="about" id="about">
     <h2>About</h2>
     <p>
@@ -67,7 +85,20 @@
     © 2026 GALU
   </footer>
 
-  <script src="script.js"></script>
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <div class="modal-iframe-wrap">
+        <iframe id="modalFrame" src="" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+      <a class="modal-external-btn" id="modalExternal" href="#" target="_blank">
+        Abrir en tienda ↗
+      </a>
+    </div>
+  </div>
 
+  <script src="script.js"></script>
 </body>
 </html>
