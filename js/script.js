@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  fetch("components/navbar.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar").innerHTML = data;
+  });
+  
   // ── EXPLORE BUTTON ──────────────────────────────────────
   const btn = document.querySelector(".explore-btn");
   if (btn) {
