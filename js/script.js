@@ -34,7 +34,58 @@ document.addEventListener("DOMContentLoaded", () => {
       e.target.reset();
     });
   }
+// ── PRODUCT PAGE ─────────────────────────────────────────
+  const productPage = document.getElementById("productPage");
+  if (productPage) {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const product = window.PRODUCTS ? window.PRODUCTS[id] : null;
 
+    if (!product) {
+      productPage.innerHTML = `
+        <div class="product-not-found">
+          <h2>Diseño no encontrado</h2>
+          <p>Vuelve a la <a href="/index.html#gallery">galería</a>.</p>
+        </div>
+      `;
+    } else {
+      document.title = `${product.name} | GALU`;
+
+      const sizesHtml = product.comingSoon ? "" : `
+        <div class="product-sizes">
+          <span>Talla</span>
+          <div class="size-options">
+            <button class="size-btn" data-size="S">S</button>
+            <button class="size-btn" data-size="M">M</button>
+            <button class="size-btn" data-size="L">L</button>
+            <button class="size-btn" data-size="XL">XL</button>
+          </div>
+        </div>
+      `;
+
+      const buyHtml = product.comingSoon
+        ? `<button class="explore-btn" disabled>Próximamente</button>`
+        : `<a class="explore-btn" href="${product.fourthwallUrl}" target="_blank">Comprar ahora ↗</a>`;
+
+      productPage.innerHTML = `
+        <div class="product-image" style="background:${product.image}"></div>
+        <div class="product-info">
+          <h2>${product.name}</h2>
+          ${product.price ? `<p class="product-price">${product.price}</p>` : ""}
+          <p class="product-description">${product.description || "Diseño en camino. Pronto disponible."}</p>
+          ${sizesHtml}
+          ${buyHtml}
+        </div>
+      `;
+
+      productPage.querySelectorAll(".size-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          productPage.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+    }
+  }
   // ── CURSOR STAR ─────────────────────────────────────────
   const cursor = document.getElementById("cursor");
   document.addEventListener("mousemove", (e) => {
@@ -68,17 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modalFrame.src = "";
     document.body.style.overflow = "";
   }
-
-  // Abrir modal al hacer clic en botón de card
-  document.querySelectorAll(".card-buy-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const card = btn.closest(".card");
-      const url  = card.dataset.product;
-      const name = card.dataset.name;
-      if (url) openModal(url, name);
-    });
-  });
 
   // Cerrar con X
   modalClose.addEventListener("click", closeModal);
