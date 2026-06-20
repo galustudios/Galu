@@ -329,6 +329,7 @@
 
   <div id="footer"></div>
 
+  <script src="https://www.paypal.com/sdk/js?client-id=AQ4rwklnigQvUnvHXuxi_7EL561EVy2Z6TZ1XcXAassMLYtG8PFHh5RZ8ajcq5CTKb7MrPww6Dn06PZd&currency=USD"></script>
   <script src="/js/products.js"></script>
   <script src="/js/script.js"></script>
   <script>
@@ -428,7 +429,7 @@
         </div>
 
         <div class="checkout-area">
-          <button class="btn-checkout" id="checkoutBtn">Checkout</button>
+          <div id="paypal-button-container"></div>
           <a href="/index.html#gallery" class="btn-continue">Continue browsing</a>
         </div>
       `;
@@ -468,13 +469,75 @@
         });
       });
 
-      // Checkout (por ahora placeholder — aquí irá PayPal)
-      const checkoutBtn = document.getElementById("checkoutBtn");
-      if (checkoutBtn) {
-        checkoutBtn.addEventListener("click", () => {
-          // TODO: integrar PayPal
-          showToast("Coming soon: PayPal checkout ✦");
-        });
+      // ── PAYPAL BUTTON ─────────────────────────────────────────
+      if (typeof paypal !== "undefined") {
+        paypal.Buttons({
+          style: {
+            layout: "vertical",
+            color:  "black",
+            shape:  "rect",
+            label:  "pay",
+          },
+
+          createOrder: async () => {
+            const cart = getCart();
+            const res = await fetch("/api/create-order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ items: cart }),
+            });
+            const data = await res.json();
+            if (!data.orderID) throw new Error("Could not create order");
+            return data.orderID;
+          },
+
+          onApprove: async (data) => {
+            showToast("Processing your order...");
+            const cart = getCart();
+            const res = await fetch("/api/capture-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                orderID: data.orderID,
+                cartItems: cart,
+                shipping: {
+                  name: (data.payer?.name?.given_name || "") + " " + (data.payer?.name?.surname || ""),
+                  email: data.payer?.email_address || "",
+                  address1: data.purchase_units?.[0]?.shipping?.address?.address_line_1 || "",
+                  city: data.purchase_units?.[0]?.shipping?.address?.admin_area_2 || "",
+                  state: data.purchase_units?.[0]?.shipping?.address?.admin_area_1 || "",
+                  country: data.purchase_units?.[0]?.shipping?.address?.country_code || "US",
+                  zip: data.purchase_units?.[0]?.shipping?.address?.postal_code || "",
+                },
+              }),
+            });
+            const result = await res.json();
+            if (result.success) {
+              localStorage.removeItem("galu_cart");
+              document.getElementById("cartContent").innerHTML = `
+                <div class="cart-empty">
+                  <div class="cart-empty-icon">✦</div>
+                  <h3>Order confirmed</h3>
+                  <p>Thank you. Your piece is on its way to production.</p>
+                  <a href="/index.html" class="btn-continue">Back to gallery</a>
+                </div>
+              `;
+              document.getElementById("cartCount").textContent = "— 0 pieces selected";
+            } else {
+              showToast("Something went wrong. Please contact us.");
+              console.error("Capture error:", result);
+            }
+          },
+
+          onError: (err) => {
+            console.error("PayPal error:", err);
+            showToast("Payment failed. Please try again.");
+          },
+
+          onCancel: () => {
+            showToast("Payment cancelled.");
+          },
+        }).render("#paypal-button-container");
       }
     }
 
