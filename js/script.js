@@ -115,18 +115,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function closeModal() {
+    if (!overlay) return;
     overlay.classList.remove("active");
     modalFrame.src = "";
     document.body.style.overflow = "";
   }
 
-  // Cerrar con X
-  modalClose.addEventListener("click", closeModal);
+ // Cerrar con X (solo si el modal existe en esta página)
+  if (modalClose && overlay) {
+    modalClose.addEventListener("click", closeModal);
 
-  // Cerrar al hacer clic fuera del modal
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closeModal();
-  });
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+  }
 
   // Cerrar con Escape
   document.addEventListener("keydown", (e) => {
