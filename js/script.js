@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (gallery) gallery.scrollIntoView({ behavior: "smooth" });
     });
   }
+  // ── FORMULARIO DE CONTACTO ──────────────────────────────
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("¡Gracias por escribirnos! Te responderemos pronto.");
+      e.target.reset();
+    });
+  }
 
   // ── CURSOR STAR ─────────────────────────────────────────
   const cursor = document.getElementById("cursor");
