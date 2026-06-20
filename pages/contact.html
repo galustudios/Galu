@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | GALU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="background"></div>
+  <div class="cursor-star" id="cursor"></div>
+
+  <div id="navbar"></div>
+
+  <section class="contact-page">
+    <h2>Contact</h2>
+    <p class="contact-intro">¿Tienes una pregunta, una idea o quieres colaborar? Escríbenos.</p>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+      </div>
+
+      <button type="submit" class="explore-btn">Enviar</button>
+    </form>
+
+    <div class="contact-alt">
+      <p>O escríbenos directo a <a href="mailto:galustudios@gmail.com">galustudios@gmail.com</a></p>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
