@@ -1,21 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   fetch("/components/navbar.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("navbar").innerHTML = data;
-  });
-  fetch("/components/footer.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("footer").innerHTML = data;
-
-    document.getElementById("newsletterForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("¡Gracias por suscribirte! Pronto tendrás novedades de GALU.");
-      e.target.reset();
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("navbar").innerHTML = data;
     });
-  });
+
+  fetch("/components/footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer").innerHTML = data;
+
+      const newsletterForm = document.getElementById("newsletterForm");
+      if (newsletterForm) {
+        newsletterForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("You're in. Expect news from GALU soon.");
+          e.target.reset();
+        });
+      }
+    });
 
   // ── EXPLORE BUTTON ──────────────────────────────────────
   const btn = document.querySelector(".explore-btn");
@@ -25,16 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (gallery) gallery.scrollIntoView({ behavior: "smooth" });
     });
   }
-  // ── FORMULARIO DE CONTACTO ──────────────────────────────
+
+  // ── CONTACT FORM ────────────────────────────────────────
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("¡Gracias por escribirnos! Te responderemos pronto.");
+      alert("Message received. We'll get back to you soon.");
       e.target.reset();
     });
   }
-// ── PRODUCT PAGE ─────────────────────────────────────────
+
+  // ── PRODUCT PAGE ─────────────────────────────────────────
   const productPage = document.getElementById("productPage");
   if (productPage) {
     const params = new URLSearchParams(window.location.search);
@@ -44,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!product) {
       productPage.innerHTML = `
         <div class="product-not-found">
-          <h2>Diseño no encontrado</h2>
-          <p>Vuelve a la <a href="/index.html#gallery">galería</a>.</p>
+          <h2>Design not found</h2>
+          <p>Go back to the <a href="/index.html#gallery">gallery</a>.</p>
         </div>
       `;
     } else {
@@ -53,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const sizesHtml = product.comingSoon ? "" : `
         <div class="product-sizes">
-          <span>Talla</span>
+          <span>Size</span>
           <div class="size-options">
             <button class="size-btn" data-size="S">S</button>
             <button class="size-btn" data-size="M">M</button>
@@ -64,15 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       const buyHtml = product.comingSoon
-        ? `<button class="explore-btn" disabled>Próximamente</button>`
-        : `<button class="explore-btn" id="addToCartBtn">Añadir al carrito</button>`;
+        ? `<button class="explore-btn" disabled>Coming soon</button>`
+        : `<button class="explore-btn" id="addToCartBtn">Add to cart</button>`;
 
       productPage.innerHTML = `
         <div class="product-image" style="background:${product.image}"></div>
         <div class="product-info">
           <h2>${product.name}</h2>
           ${product.price ? `<p class="product-price">${product.price}</p>` : ""}
-          <p class="product-description">${product.description || "Diseño en camino. Pronto disponible."}</p>
+          <p class="product-description">${product.description || "Design on its way. Coming soon."}</p>
           ${sizesHtml}
           ${buyHtml}
         </div>
@@ -92,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (addBtn) {
         addBtn.addEventListener("click", () => {
           if (!selectedSize) {
-            alert("Por favor elige una talla.");
+            alert("Please select a size.");
             return;
           }
 
@@ -112,25 +118,28 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           localStorage.setItem("galu_cart", JSON.stringify(cart));
-          alert(`${product.name} (talla ${selectedSize}) agregado al carrito.`);
+          alert(`${product.name} (size ${selectedSize}) added to your cart.`);
         });
       }
     }
   }
+
   // ── CURSOR STAR ─────────────────────────────────────────
   const cursor = document.getElementById("cursor");
-  document.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top  = e.clientY + "px";
-  });
+  if (cursor) {
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top  = e.clientY + "px";
+    });
 
-  const interactivos = document.querySelectorAll("a, button, .card");
-  interactivos.forEach(el => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
-  });
+    const interactivos = document.querySelectorAll("a, button, .card");
+    interactivos.forEach(el => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+      el.addEventListener("mouseleave", () => cursor.classList.remove("hover"));
+    });
+  }
 
-  // ── MODAL FOURTHWALL ────────────────────────────────────
+  // ── MODAL ────────────────────────────────────────────────
   const overlay    = document.getElementById("modalOverlay");
   const modalFrame = document.getElementById("modalFrame");
   const modalTitle = document.getElementById("modalTitle");
@@ -152,30 +161,27 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   }
 
- // Cerrar con X (solo si el modal existe en esta página)
   if (modalClose && overlay) {
     modalClose.addEventListener("click", closeModal);
-
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeModal();
     });
   }
 
-  // Cerrar con Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModal();
   });
 
-  // ── MARIPOSAS ───────────────────────────────────────────
-  function crearMariposa() {
+  // ── BUTTERFLIES ──────────────────────────────────────────
+  function createButterfly() {
     const el = document.createElement("div");
     el.classList.add("butterfly");
 
     const size     = Math.random() * 22 + 18;
     const drift    = (Math.random() - 0.5) * 130;
-    const duracion = Math.random() * 9 + 8;
-    const delay    = Math.random() * duracion;
-    const aleteo   = Math.random() * 0.4 + 0.3;
+    const duration = Math.random() * 9 + 8;
+    const delay    = Math.random() * duration;
+    const flutter  = Math.random() * 0.4 + 0.3;
 
     el.innerHTML = `
       <svg width="${size}" height="${size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -190,17 +196,17 @@ document.addEventListener("DOMContentLoaded", () => {
     el.style.left = `${Math.random() * 100}vw`;
     el.style.bottom = `-${size}px`;
     el.style.setProperty("--drift", `${drift}px`);
-    el.style.animationDuration = `${duracion}s`;
+    el.style.animationDuration = `${duration}s`;
     el.style.animationDelay   = `-${delay}s`;
-    el.querySelector("svg").style.animationDuration = `${aleteo}s`;
+    el.querySelector("svg").style.animationDuration = `${flutter}s`;
 
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), (duracion + 1) * 1000);
+    setTimeout(() => el.remove(), (duration + 1) * 1000);
   }
 
   for (let i = 0; i < 12; i++) {
-    setTimeout(crearMariposa, i * 600);
+    setTimeout(createButterfly, i * 600);
   }
-  setInterval(crearMariposa, 1800);
+  setInterval(createButterfly, 1800);
 
 });

@@ -2,23 +2,20 @@ window.PRODUCTS = {
   "01": {
     name: "Astronaut Cat Space Hoodie",
     price: "$58.00",
-    description: "Un astronauta felino flotando entre estrellas bordado a mano en el pecho. Hoodie de algodón premium, corte unisex.",
+    description: "A happy feline astronaut floating among the stars, hand-embroidered on the chest. Premium cotton hoodie, unisex fit.",
     image: "linear-gradient(135deg, #1a1a2e, #16213e)",
-  
   },
   "02": {
     name: "Mechanical Butterfly Zip Hoodie",
     price: "$62.00",
-    description: "Una mariposa mecánica bordada con detalle metálico, sobre hoodie con cierre completo.",
+    description: "A mechanical butterfly embroidered with metallic detail, on a full-zip hoodie.",
     image: "linear-gradient(135deg, #1d1d1d, #2a1f3d)",
-
   },
   "03": {
     name: "Galu Hoodie",
     price: "$55.00",
-    description: "El diseño insignia de GALU, bordado clásico en hilo lila sobre fondo negro profundo.",
+    description: "GALU's signature design — classic embroidery in lilac thread on a deep black base.",
     image: "linear-gradient(135deg, #0f2027, #203a43)",
-
   },
   "04": { name: "No. 04", comingSoon: true, image: "linear-gradient(135deg, #1a1a1a, #2d2d2d)" },
   "05": { name: "No. 05", comingSoon: true, image: "linear-gradient(135deg, #2c1654, #1a0a2e)" },
