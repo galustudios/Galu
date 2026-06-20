@@ -79,8 +79,8 @@ body {
   50%       { transform: scale(0.9); }
 }
 
-/* HEADER */
-header {
+/* NAVBAR */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -96,21 +96,31 @@ header {
   font-family: "Cinzel", serif;
   font-size: 34px;
   letter-spacing: 6px;
+  color: white;
+  text-decoration: none;
 }
 
-nav {
+.nav-links {
   display: flex;
+  align-items: center;
   gap: 40px;
+  list-style: none;
 }
 
-nav a {
+.nav-links a {
   color: white;
   text-decoration: none;
   transition: 0.3s;
 }
 
-nav a:hover {
+.nav-links a:hover {
   color: #d7c5ff;
+}
+
+.cart {
+  font-size: 20px;
+  text-decoration: none;
+  cursor: none;
 }
 
 /* HERO */
@@ -394,9 +404,9 @@ footer {
   .hero h1 { font-size: 55px; }
   .hero h2 { font-size: 25px; }
   .hero p  { font-size: 18px; }
-  nav      { display: none; }
+  .nav-links { display: none; }
 
   .modal-iframe-wrap iframe {
     height: 500px;
   }
-  }
+}
