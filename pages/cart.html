@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito | GALU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── CART PAGE ─────────────────────────────────── */
+    .cart-section {
+      min-height: 80vh;
+      padding: 8rem 2rem 6rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .cart-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #e8e0ff;
+      margin-bottom: 0.4rem;
+    }
+
+    .cart-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(200, 180, 255, 0.5);
+      letter-spacing: 0.12em;
+      margin-bottom: 3rem;
+    }
+
+    /* ── EMPTY STATE ───────────────────────────────── */
+    .cart-empty {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .cart-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.4;
+    }
+
+    .cart-empty h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: rgba(200, 180, 255, 0.6);
+      margin-bottom: 0.8rem;
+    }
+
+    .cart-empty p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(200, 180, 255, 0.35);
+      margin-bottom: 2rem;
+    }
+
+    /* ── ITEMS ─────────────────────────────────────── */
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-bottom: 3rem;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(180, 140, 255, 0.1);
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .cart-item-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .cart-item-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: #e8e0ff;
+    }
+
+    .cart-item-meta {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: rgba(200, 180, 255, 0.45);
+      letter-spacing: 0.08em;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      background: rgba(180, 140, 255, 0.08);
+      border: 1px solid rgba(180, 140, 255, 0.2);
+      color: #c8b4ff;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: rgba(180, 140, 255, 0.18);
+      border-color: rgba(180, 140, 255, 0.4);
+    }
+
+    .qty-value {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: #e8e0ff;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cart-item-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.8rem;
+    }
+
+    .cart-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e8e0ff;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: rgba(200, 180, 255, 0.25);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      font-family: 'Cinzel', serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      padding: 0;
+    }
+
+    .remove-btn:hover {
+      color: rgba(255, 120, 120, 0.6);
+    }
+
+    /* ── SUMMARY ───────────────────────────────────── */
+    .cart-summary {
+      border-top: 1px solid rgba(180, 140, 255, 0.15);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(200, 180, 255, 0.55);
+      letter-spacing: 0.08em;
+    }
+
+    .summary-row.total {
+      border-top: 1px solid rgba(180, 140, 255, 0.12);
+      padding-top: 1rem;
+      margin-top: 0.4rem;
+      font-size: 1.15rem;
+      color: #e8e0ff;
+    }
+
+    .summary-row.total span:last-child {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .summary-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      color: rgba(200, 180, 255, 0.3);
+      letter-spacing: 0.06em;
+      text-align: right;
+      margin-top: 0.2rem;
+    }
+
+    /* ── CHECKOUT BTN ──────────────────────────────── */
+    .checkout-area {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .btn-checkout {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #0a0612;
+      background: linear-gradient(135deg, #c8a8ff, #a67cff);
+      border: none;
+      padding: 1.1rem 2rem;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s;
+      border-radius: 2px;
+    }
+
+    .btn-checkout:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .btn-continue {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(200, 180, 255, 0.4);
+      background: none;
+      border: 1px solid rgba(180, 140, 255, 0.15);
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      border-radius: 2px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-continue:hover {
+      border-color: rgba(180, 140, 255, 0.35);
+      color: rgba(200, 180, 255, 0.7);
+    }
+
+    /* ── TOAST ─────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(30, 15, 50, 0.95);
+      border: 1px solid rgba(180, 140, 255, 0.25);
+      color: #e8e0ff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      z-index: 999;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 600px) {
+      .cart-item {
+        grid-template-columns: 64px 1fr auto;
+        gap: 1rem;
+      }
+
+      .cart-item-thumb {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="cursor-star" id="cursor"></div>
+
+  <div id="navbar"></div>
+
+  <section class="cart-section">
+    <h1 class="cart-title">Carrito</h1>
+    <p class="cart-subtitle" id="cartCount">— 0 piezas seleccionadas</p>
+
+    <div id="cartContent"></div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <div id="footer"></div>
+
+  <script src="/js/products.js"></script>
+  <script src="/js/script.js"></script>
+  <script>
+    // ── CART LOGIC ──────────────────────────────────────────────────────────
+    const STORAGE_KEY = "galu_cart";
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function parsePrice(priceStr) {
+      return parseFloat(priceStr.replace(/[^0-9.]/g, "")) || 0;
+    }
+
+    function formatPrice(num) {
+      return "$" + num.toFixed(2);
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById("cartContent");
+      const countEl   = document.getElementById("cartCount");
+
+      const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+      countEl.textContent = `— ${totalItems} ${totalItems === 1 ? "pieza seleccionada" : "piezas seleccionadas"}`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">◌</div>
+            <h3>Tu carrito está vacío</h3>
+            <p>Explora la galería y encuentra tu pieza.</p>
+            <a href="/index.html#gallery" class="btn-continue">Ver galería</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Build items HTML
+      let itemsHtml = cart.map((item, idx) => {
+        const product = window.PRODUCTS ? window.PRODUCTS[item.id] : null;
+        const bg = product ? product.image : "linear-gradient(135deg, #1a1a2e, #16213e)";
+        const lineTotal = formatPrice(parsePrice(item.price) * item.qty);
+
+        return `
+          <div class="cart-item" data-idx="${idx}" style="animation-delay: ${idx * 0.06}s">
+            <div class="cart-item-thumb" style="background: ${bg}"></div>
+
+            <div class="cart-item-info">
+              <span class="cart-item-name">${item.name}</span>
+              <span class="cart-item-meta">Talla ${item.size} · ${item.price} c/u</span>
+              <div class="cart-item-controls">
+                <button class="qty-btn" data-action="dec" data-idx="${idx}">−</button>
+                <span class="qty-value">${item.qty}</span>
+                <button class="qty-btn" data-action="inc" data-idx="${idx}">+</button>
+              </div>
+            </div>
+
+            <div class="cart-item-right">
+              <span class="cart-item-price">${lineTotal}</span>
+              <button class="remove-btn" data-action="remove" data-idx="${idx}">Quitar</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Totals
+      const subtotal = cart.reduce((s, i) => s + parsePrice(i.price) * i.qty, 0);
+      const shipping  = "Calculado al pagar";
+
+      const summaryHtml = `
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>${formatPrice(subtotal)}</span>
+          </div>
+          <div class="summary-row">
+            <span>Envío</span>
+            <span>${shipping}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total estimado</span>
+            <span>${formatPrice(subtotal)}</span>
+          </div>
+          <p class="summary-note">Impuestos y envío calculados al finalizar</p>
+        </div>
+
+        <div class="checkout-area">
+          <button class="btn-checkout" id="checkoutBtn">Finalizar compra</button>
+          <a href="/index.html#gallery" class="btn-continue">Seguir explorando</a>
+        </div>
+      `;
+
+      container.innerHTML = `
+        <div class="cart-items">${itemsHtml}</div>
+        ${summaryHtml}
+      `;
+
+      // Events — quantity & remove
+      container.querySelectorAll("[data-action]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const cart = getCart();
+          const idx  = parseInt(btn.dataset.idx);
+          const action = btn.dataset.action;
+
+          if (action === "inc") {
+            cart[idx].qty += 1;
+            saveCart(cart);
+            renderCart();
+          } else if (action === "dec") {
+            if (cart[idx].qty > 1) {
+              cart[idx].qty -= 1;
+            } else {
+              cart.splice(idx, 1);
+              showToast("Pieza eliminada del carrito");
+            }
+            saveCart(cart);
+            renderCart();
+          } else if (action === "remove") {
+            const name = cart[idx].name;
+            cart.splice(idx, 1);
+            saveCart(cart);
+            renderCart();
+            showToast(`${name} eliminado`);
+          }
+        });
+      });
+
+      // Checkout (por ahora placeholder — aquí irá PayPal)
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+          // TODO: integrar PayPal
+          showToast("Próximamente: pago con PayPal ✦");
+        });
+      }
+    }
+
+    // Init when DOM ready (script.js ya cargó navbar/footer)
+    document.addEventListener("DOMContentLoaded", renderCart);
+  </script>
+</body>
+</html>
