@@ -299,11 +299,140 @@ body {
   opacity: 0.85;
 }
 
-/* FOOTER */
-footer {
-  padding: 60px;
-  text-align: center;
+/* FOOTER */ 
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 80px 8% 0;
+  border-top: 1px solid rgba(215, 197, 255, 0.15);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px;
+  padding-bottom: 60px;
+}
+
+.footer-brand .footer-logo {
+  font-family: "Cinzel", serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-tagline {
+  margin-top: 10px;
+  font-size: 16px;
   opacity: 0.6;
+  font-style: italic;
+}
+
+.footer-links h4,
+.footer-newsletter h4,
+.footer-social h4 {
+  font-family: "Cinzel", serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #d7c5ff;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.75;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  color: #d7c5ff;
+}
+
+.footer-newsletter p {
+  font-size: 15px;
+  opacity: 0.65;
+  margin-bottom: 16px;
+  max-width: 240px;
+}
+
+.newsletter-form {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 8px;
+  max-width: 260px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 15px;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-form button {
+  background: none;
+  border: none;
+  color: #d7c5ff;
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: none;
+  white-space: nowrap;
+}
+
+.footer-social .social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-social a {
+  color: white;
+  opacity: 0.75;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.footer-social a:hover {
+  opacity: 1;
+  color: #d7c5ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+@media (max-width: 700px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 40px;
+  }
 }
 
 /* ── MODAL ─────────────────────────────────────── */

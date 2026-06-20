@@ -5,7 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(data => {
     document.getElementById("navbar").innerHTML = data;
   });
-  
+  fetch("components/footer.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+
+    document.getElementById("newsletterForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("¡Gracias por suscribirte! Pronto tendrás novedades de GALU.");
+      e.target.reset();
+    });
+  });
+
   // ── EXPLORE BUTTON ──────────────────────────────────────
   const btn = document.querySelector(".explore-btn");
   if (btn) {
