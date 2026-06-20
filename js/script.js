@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const buyHtml = product.comingSoon
         ? `<button class="explore-btn" disabled>Próximamente</button>`
-        : `<a class="explore-btn" href="${product.fourthwallUrl}" target="_blank">Comprar ahora ↗</a>`;
+        : `<button class="explore-btn" id="addToCartBtn">Añadir al carrito</button>`;
 
       productPage.innerHTML = `
         <div class="product-image" style="background:${product.image}"></div>
@@ -78,12 +78,43 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
+      let selectedSize = null;
+
       productPage.querySelectorAll(".size-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           productPage.querySelectorAll(".size-btn").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
+          selectedSize = btn.dataset.size;
         });
       });
+
+      const addBtn = document.getElementById("addToCartBtn");
+      if (addBtn) {
+        addBtn.addEventListener("click", () => {
+          if (!selectedSize) {
+            alert("Por favor elige una talla.");
+            return;
+          }
+
+          const cart = JSON.parse(localStorage.getItem("galu_cart") || "[]");
+          const existing = cart.find(item => item.id === id && item.size === selectedSize);
+
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            cart.push({
+              id,
+              name: product.name,
+              price: product.price,
+              size: selectedSize,
+              qty: 1
+            });
+          }
+
+          localStorage.setItem("galu_cart", JSON.stringify(cart));
+          alert(`${product.name} (talla ${selectedSize}) agregado al carrito.`);
+        });
+      }
     }
   }
   // ── CURSOR STAR ─────────────────────────────────────────
